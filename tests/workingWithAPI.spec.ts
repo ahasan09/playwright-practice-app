@@ -4,7 +4,6 @@ import tags from '../test-data/tags.json'
 test.beforeEach(async ({ page }) => {
 
     await page.route('*/**/api/tags', async route => {
-
         await route.fulfill({
             status: 200,
             headers: {
@@ -27,9 +26,18 @@ test('has title', async ({ page }) => {
 })
 
 test('tags should show mock data', async ({ page }) => {
-    // 3. Assert UI updated
-    //await expect(page.locator('.tag-list')).toContainText('Mocked123');
+    // 1. Check Text Directly on Page
+    await expect(page.getByText('Mocked123')).toBeVisible();
+
+    const tagList = page.locator('.sidebar .tag-list');
+
+    // 2. Check Specific COntainer
+    await expect(tagList).toContainText('Mocked123');
+
+    // 3. Check if the tag list is visible    
+    await expect(tagList).toBeVisible();
+    await expect(tagList).toContainText('Mocked123');
 
     // Optional visual confirmation
-    //await page.screenshot({ path: 'tags-loaded.png' });
+    await page.screenshot({ path: 'tags-loaded.png' });
 })
