@@ -103,5 +103,6 @@ test('Extracting values', async ({ page }) => {
 })
 
 test('Alternative waits', async ({ page }) => {
-    await page.waitForResponse('')
+    //await page.waitForResponse('');
+    await expect(page.getByText('Inline form')).toBeVisible();
 })
