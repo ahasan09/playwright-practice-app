@@ -1,4 +1,5 @@
 import { test } from "@playwright/test"
+import {faker} from '@faker-js/faker'
 import { PageManager } from "../page-objects/pageManager"
 
 test.beforeEach(async ({ page }) => {
@@ -17,10 +18,12 @@ test('navigate to form page', async ({ page }) => {
 
 test('parametrized methods', async ({ page }) => {
     const pm = new PageManager(page)
+    const randomFullName = faker.person.fullName({lastName:'Hasan'})
+    const randomEmail = `${randomFullName.toLowerCase().replace(' ', '')}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo().formLayoutsPage()
-    await pm.onFormLayoutsPage().submitGridFormWithCredentialsAndSelectOption('test@test.com', '123', 'Option 2')
-    await pm.onFormLayoutsPage().submitInlineFormWithNameEmailAndCheckBox('Abul Hasan', 'test@test.com', true)
+    await pm.onFormLayoutsPage().submitGridFormWithCredentialsAndSelectOption(randomEmail, '123', 'Option 2')
+    await pm.onFormLayoutsPage().submitInlineFormWithNameEmailAndCheckBox(randomFullName, randomEmail, true)
     await pm.navigateTo().datepickerPage()
     await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(10)
     await pm.onDatepickerPage().selectDatePickerWithRangeFromToday(6, 15)
