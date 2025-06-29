@@ -1,7 +1,7 @@
 import test from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:4200/')
+    await page.goto('/')
 })
 
 test.describe('forms suit', () => {

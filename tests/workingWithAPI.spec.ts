@@ -34,7 +34,7 @@ test.beforeEach(async ({ page }) => {
         })
     })
 
-    await page.goto('https://conduit.bondaracademy.com/', {
+    await page.goto(process.env.CONDUIT_FE, {
         waitUntil: 'networkidle'
     });
 })
@@ -71,7 +71,7 @@ test('articles should show mock data', async ({ page }) => {
 })
 
 test('delete article', async ({ page, request }) => {
-    const articleResponse = await request.post('https://conduit-api.bondaracademy.com/api/articles', {
+    const articleResponse = await request.post(`${process.env.CONDUIT_API}/articles`, {
         data: {
             "article": {
                 "title": "Test article title",
@@ -100,7 +100,7 @@ test('create article', async ({ page, request }) => {
     await page.getByRole('textbox', { name: 'Enter tags' }).fill('Playwrite')
     await page.getByRole('button', { name: 'Publish Article' }).click()
 
-    const articleResponse = await page.waitForResponse('https://conduit-api.bondaracademy.com/api/articles/')
+    const articleResponse = await page.waitForResponse(`${process.env.CONDUIT_API}/articles/`)
     const articleResponseBody = await articleResponse.json()
     const slugId = articleResponseBody.article.slug
 
@@ -111,7 +111,7 @@ test('create article', async ({ page, request }) => {
     await expect(page.locator('app-article-list h1').first()).toContainText('Playwrite is awesome')
 
     // Delete article
-    const deletedArticleResponse = await request.delete(`https://conduit-api.bondaracademy.com/api/articles/${slugId}`);
+    const deletedArticleResponse = await request.delete(`${process.env.CONDUIT_API}/articles/${slugId}`);
     expect(deletedArticleResponse.status()).toEqual(204)
 
     await page.getByText('Global Feed').click()

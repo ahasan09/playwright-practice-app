@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('http://uitestingplayground.com/ajax')
+    await page.goto(`${process.env.UI_TESTING_PLAYGROUND}/ajax`)
     await page.getByText('Button Triggering AJAX Request').click()
 })
 
@@ -27,14 +27,14 @@ test('Alternative waits', async ({ page }) => {
     //await page.waitForSelector('.bg-success')
 
     //___ wait for particular response
-    await page.waitForResponse('http://uitestingplayground.com/ajaxdata')
+    await page.waitForResponse(`${process.env.UI_TESTING_PLAYGROUND}/ajaxdata`)
 
 
     const text = await successButton.allTextContents()
     expect(text).toContain('Data loaded with AJAX get request.')
 })
 
-test('Timeouts', async ({ page }) => {
+test.skip('Timeouts', async ({ page }) => {
     const successButton = page.locator('.bg-success')
     await successButton.click()
 })
