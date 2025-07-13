@@ -42,6 +42,8 @@ export default defineConfig({
         //navigationTimeout: 5000,
         video: 'on'
     },
+    globalSetup: require.resolve('./global-setup.ts'),
+    globalTeardown: require.resolve('./global-teardown.ts'),
 
     /* Configure projects for major browsers */
     projects: [
@@ -50,17 +52,41 @@ export default defineConfig({
             testMatch: 'auth.setup.ts'
         },
         {
+            name: 'articleSetup',
+            testMatch: 'newArticle.setup.ts',
+            dependencies: ['setup'],
+            teardown: 'articleCleanUp'
+        },
+        {
+            name: 'articleCleanUp',
+            testMatch: 'articleCleanUp.setup.ts'
+        },
+        {
+            name: 'likeCounter',
+            testMatch: 'likesCounter.spec.ts',
+            use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
+            dependencies: ['articleSetup']
+        },
+        {
+            name: 'likeCounterGlobal',
+            testMatch: 'likesCounterGlobal.spec.ts',
+            use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
+        },
+        {
             name: 'chromium',
+            testIgnore: 'likesCounter.spec.ts',
             use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
             dependencies: ['setup']
         },
         {
             name: 'firefox',
+            testIgnore: 'likesCounter.spec.ts',
             use: { ...devices['Desktop Firefox'], storageState: '.auth/user.json' },
             dependencies: ['setup']
         },
         {
             name: 'webkit',
+            testIgnore: 'likesCounter.spec.ts',
             use: { ...devices['Desktop Safari'], storageState: '.auth/user.json' },
             dependencies: ['setup']
         },
