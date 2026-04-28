@@ -9,6 +9,23 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:ci": "ng serve --host 127.0.0.1 --port 4200",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed --project=chromium",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:all-browsers": "npm-run-all -s test:chromium test:firefox test:webkit",
+    "test:shard": "playwright test --shard=1/2",
+    "test:update-snapshots": "playwright test tests/visual-regression.spec.ts --update-snapshots",
+    "test:report": "playwright show-report",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "lint:tests": "eslint tests/accessibility.spec.ts tests/error-states.spec.ts tests/visual-regression.spec.ts playwright.config.ts test-options.ts",
+    "mock-api": "json-server --watch mock-api/db.json --port 3001",
+    "start:with-mock-api": "npm-run-all -p mock-api start",
     "pageObjects-firefox": "npx playwright test usePageObjects.spec.ts --project=firefox",
     "workingWithAPI-firefox": "npx playwright test workingWithAPI.spec.ts --project=firefox"
   },
@@ -55,6 +72,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@angular-devkit/build-angular": "^14.2.10",
     "@angular/cli": "^14.2.10",
     "@angular/compiler-cli": "^14.2.12",
@@ -63,17 +81,25 @@
     "@faker-js/faker": "^9.8.0",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@playwright/test": "^1.50.1",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
     "@types/leaflet": "1.2.3",
     "@types/node": "^12.12.70",
+    "allure-playwright": "^3.2.0",
     "codelyzer": "^0.0.28",
     "conventional-changelog-cli": "^2.2.2",
     "dotenv": "^17.2.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-playwright": "^2.2.2",
+    "json-server": "^1.0.0-beta.3",
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
     "stylelint": "^15.6.0",
     "ts-node": "3.2.2",
     "tslint": "~6.1.0",
     "tslint-language-service": "^0.9.9",
-    "typescript": "~4.6.4"
+    "typescript": "~4.6.4",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
   }
 }

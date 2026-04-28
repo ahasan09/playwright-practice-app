@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Test User",
+      "email": "test@example.com"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "title": "Mocked Article",
+      "description": "Served from json-server mock API",
+      "likes": 5
+    }
+  ]
+}
