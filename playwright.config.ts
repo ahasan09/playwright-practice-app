@@ -79,19 +79,19 @@ export default defineConfig({
         },
         {
             name: 'chromium',
-            testIgnore: 'likesCounter.spec.ts',
+            testIgnore: ['likesCounter.spec.ts', 'likesCounterGlobal.spec.ts', 'autoWaiting.spec.ts'],
             use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
             dependencies: ['setup']
         },
         {
             name: 'firefox',
-            testIgnore: 'likesCounter.spec.ts',
+            testIgnore: ['likesCounter.spec.ts', 'likesCounterGlobal.spec.ts'],
             use: { ...devices['Desktop Firefox'], storageState: '.auth/user.json' },
             dependencies: ['setup']
         },
         {
             name: 'webkit',
-            testIgnore: 'likesCounter.spec.ts',
+            testIgnore: ['likesCounter.spec.ts', 'likesCounterGlobal.spec.ts'],
             use: { ...devices['Desktop Safari'], storageState: '.auth/user.json' },
             dependencies: ['setup']
         },

@@ -1,6 +1,10 @@
 import test, { expect } from "@playwright/test"
 import tags from '../test-data/tags.json'
 
+test.afterEach(async ({ page }) => {
+    await page.unrouteAll({ behavior: 'ignoreErrors' });
+});
+
 test.beforeEach(async ({ page }) => {
 
     await page.route('*/**/api/tags', async route => {
@@ -71,10 +75,11 @@ test('articles should show mock data', async ({ page }) => {
 })
 
 test('delete article', async ({ page, request }) => {
+    const title = `Test article title ${Date.now()}`
     const articleResponse = await request.post(`${process.env.CONDUIT_API}/articles`, {
         data: {
             "article": {
-                "title": "Test article title",
+                "title": title,
                 "description": "Test article about",
                 "body": "Test article description",
                 "tagList": ["test"]
@@ -85,11 +90,11 @@ test('delete article', async ({ page, request }) => {
     expect(articleResponse.ok()).toBeTruthy();
 
     await page.getByText('Global Feed').click();
-    await page.getByText('Test article title').click();
+    await page.getByText(title).click();
     await page.getByRole('button', { name: 'Delete Article' }).first().click();
     await page.getByText('Global Feed').click();
 
-    await expect(page.locator('app-article-list h1').first()).not.toContainText('Test article title')
+    await expect(page.locator('app-article-list h1').first()).not.toContainText(title)
 })
 
 test('create article', async ({ page, request }) => {

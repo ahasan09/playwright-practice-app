@@ -13,7 +13,8 @@ test.describe('Error and validation states', () => {
     await emailInput.fill('not-an-email');
     await emailInput.blur();
 
-    await expect(emailInput).toHaveClass(/ng-invalid/);
+    const isValid = await emailInput.evaluate((el: HTMLInputElement) => el.validity.valid);
+    expect(isValid).toBe(false);
   });
 
   test('keeps shell visible when articles API fails', async ({ page }) => {

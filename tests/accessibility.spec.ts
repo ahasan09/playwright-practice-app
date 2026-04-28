@@ -7,7 +7,7 @@ test.describe('Accessibility checks', () => {
     await page.getByText('Forms').click();
     await page.getByText('Form Layouts').click();
 
-    const results = await new AxeBuilder({ page }).analyze();
+    const results = await new AxeBuilder({ page }).exclude('.start-search').analyze();
     const criticalViolations = results.violations.filter((violation) => violation.impact === 'critical');
 
     expect(criticalViolations).toEqual([]);

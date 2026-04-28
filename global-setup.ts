@@ -1,5 +1,4 @@
 import { expect, request } from '@playwright/test'
-import user from './.auth/user.json'
 import fs from 'fs'
 
 async function globalSetup() {
@@ -12,15 +11,21 @@ async function globalSetup() {
     const responseBody = await loginResponse.json();
     const accessToken = responseBody.user.token;
 
-    user.origins[0].localStorage[0].value = accessToken
-    fs.writeFileSync(authFile, JSON.stringify(user))
+    const storageState = {
+        cookies: [],
+        origins: [{
+            origin: 'https://conduit.bondaracademy.com',
+            localStorage: [{ name: 'jwtToken', value: accessToken }]
+        }]
+    }
+    fs.writeFileSync(authFile, JSON.stringify(storageState))
 
     process.env['ACCESS_TOKEN'] = accessToken
 
     const articleResponse = await context.post(`${process.env.CONDUIT_API}/articles`, {
         data: {
             "article": {
-                "title": "Global Likes test article title",
+                "title": `Global Likes test article title ${Date.now()}`,
                 "description": "Global Likes test article about",
                 "body": "Global Likes test article description",
                 "tagList": []
