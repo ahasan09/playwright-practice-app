@@ -1,0 +1,39 @@
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: @angular/cdk@12.1.0
+npm error Found: @angular/common@14.3.0
+npm error node_modules/@angular/common
+npm error   @angular/common@"^14.2.12" from the root project
+npm error   peer @angular/common@"14.3.0" from @angular/forms@14.3.0
+npm error   node_modules/@angular/forms
+npm error     @angular/forms@"^14.2.12" from the root project
+npm error     peer @angular/forms@"^14.0.0" from @nebular/auth@10.0.0
+npm error     node_modules/@nebular/auth
+npm error       @nebular/auth@"10.0.0" from the root project
+npm error     2 more (@swimlane/ngx-charts, ng2-completer)
+npm error   11 more (@angular/platform-browser, ...)
+npm error
+npm error Could not resolve dependency:
+npm error peer @angular/common@"^12.0.0 || ^13.0.0-0" from @angular/cdk@12.1.0
+npm error node_modules/@angular/cdk
+npm error   @angular/cdk@"12.1.0" from the root project
+npm error   peer @angular/cdk@">=12.0.0" from @swimlane/ngx-charts@20.1.2
+npm error   node_modules/@swimlane/ngx-charts
+npm error     @swimlane/ngx-charts@"^20.1.2" from the root project
+npm error
+npm error Conflicting peer dependency: @angular/common@13.4.0
+npm error node_modules/@angular/common
+npm error   peer @angular/common@"^12.0.0 || ^13.0.0-0" from @angular/cdk@12.1.0
+npm error   node_modules/@angular/cdk
+npm error     @angular/cdk@"12.1.0" from the root project
+npm error     peer @angular/cdk@">=12.0.0" from @swimlane/ngx-charts@20.1.2
+npm error     node_modules/@swimlane/ngx-charts
+npm error       @swimlane/ngx-charts@"^20.1.2" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --force or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /Users/abulhasan/.npm/_logs/2026-04-28T19_21_31_428Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /Users/abulhasan/.npm/_logs/2026-04-28T19_21_31_428Z-debug-0.log
