@@ -1,4 +1,0 @@
-
-> ngx-admin@10.0.0 lint:tests
-> eslint tests/accessibility.spec.ts tests/error-states.spec.ts tests/visual-regression.spec.ts playwright.config.ts test-options.ts
-

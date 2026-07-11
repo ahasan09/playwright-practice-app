@@ -49,3 +49,6 @@ node_modules/
 /playwright/.cache/
 /screenshots/
 .auth
+
+# Local Claude settings
+.claude/settings.local.json
